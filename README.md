@@ -5,7 +5,6 @@ This command calculate your organization power.
 ## Usage
 
 ```console
-$ rebar3 get-deps
 $ rebar3 compile
 $ rebar3 escriptize
 ```
