@@ -44,5 +44,6 @@ main(Args) ->
     Members = orgpower_member:get_members(OrgName, Token, ?LIMIT),
     MembersWithRepo = add_repo_to_members([], Members, Token),
     StarSum = orgpower_calc:get_org_star_count(MembersWithRepo),
-    io:format("Organization power is ~p.~n", [StarSum]),
+    FollowerSum = orgpower_calc:get_org_follower_count(MembersWithRepo),
+    io:format("Organization power is ~p.~n", [StarSum * FollowerSum]),
     erlang:halt(0).

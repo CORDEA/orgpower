@@ -16,7 +16,7 @@
 % date  : 2017-07-20
 
 -module(orgpower_calc).
--export([get_org_star_count/1]).
+-export([get_org_star_count/1, get_org_follower_count/1]).
 
 -include("repository.hrl").
 -include("member.hrl").
@@ -46,3 +46,17 @@ calc_org_star_count(Members, StarCount) ->
 
 get_org_star_count(Members) ->
     calc_org_star_count(Members, 0).
+
+calc_org_follower_count(Members, FollowerCount) when length(Members) =:= 0 ->
+    FollowerCount;
+
+calc_org_follower_count(Members, FollowerCount) ->
+    [Member | Remain] = Members,
+    #member{followerCount = Count} = Member,
+    calc_org_follower_count(
+      Remain,
+      FollowerCount + Count
+    ).
+
+get_org_follower_count(Members) ->
+    calc_org_follower_count(Members, 0).
